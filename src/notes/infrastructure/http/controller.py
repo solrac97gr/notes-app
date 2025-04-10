@@ -14,9 +14,9 @@ class NotesController:
         # Initialize routes
         self.notes_bp.route('/', methods=['GET'])(self.router)
         self.notes_bp.route('/', methods=['POST'])(self.create)
-        self.notes_bp.route('/<int:id>', methods=['GET'])(self.get)
-        self.notes_bp.route('/<int:id>', methods=['PUT'])(self.update)
-        self.notes_bp.route('/<int:id>', methods=['DELETE'])(self.delete)
+        self.notes_bp.route('/<string:id>', methods=['GET'])(self.get)
+        self.notes_bp.route('/<string:id>', methods=['PUT'])(self.update)
+        self.notes_bp.route('/<string:id>', methods=['DELETE'])(self.delete)
 
     def get_blueprint(self):
         return self.notes_bp
