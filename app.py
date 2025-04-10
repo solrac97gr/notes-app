@@ -1,14 +1,8 @@
 from flask import Flask
+from notes.adapters.http.routes import notes_bp
 
 app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!!'
-
-@app.route('/about')
-def about():
-    return 'This is a simple note-taking app built with Flask.'
+app.register_blueprint(notes_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)
