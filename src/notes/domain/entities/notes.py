@@ -2,19 +2,32 @@ class Note:
     """A class to represent a note with title and content.
 
     Attributes:
+        id (str): The unique identifier of the note
         title (str): The title of the note
         content (str): The content of the note
     """
 
-    def __init__(self, title, content):
+    def __init__(self, title, content, id=None):
         """Initialize a Note object.
 
         Args:
             title (str): The title of the note
             content (str): The content of the note
+            id (str, optional): The unique identifier of the note. Defaults to None.
         """
         self.title = title
         self.content = content
+        self.id = id
+
+    @property
+    def id(self):
+        """Get the id of the note."""
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        """Set the id of the note."""
+        self._id = value
 
     @property
     def title(self):
@@ -41,20 +54,21 @@ class Note:
         """Parse note data from a JSON dictionary.
 
         Args:
-            json_data (dict): Dictionary containing title and content
+            json_data (dict): Dictionary containing title, content, and optionally id
 
         Returns:
             Note: A new Note instance created from the JSON data
         """
-        return cls(json_data['title'], json_data['content'])
+        return cls(json_data['title'], json_data['content'], json_data.get('id'))
 
     def to_json(self):
         """Convert note to a JSON serializable dictionary.
 
         Returns:
-            dict: Dictionary with title and content
+            dict: Dictionary with id, title and content
         """
         return {
+            'id': self.id,
             'title': self.title,
             'content': self.content
         }
